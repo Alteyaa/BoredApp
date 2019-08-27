@@ -4,4 +4,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_activity_intro_page_1">Here you can find everything</string>
+    <string name="title_activity_intro_page_2">Your life consists of adventure</string>
+    <string name="title_activity_intro_page_3">How you love yourself</string>
 </resources>

@@ -16,5 +16,7 @@ public class App extends Application {
         super.onCreate();
         sharedStorage = new SharedStorage(this, "prefs");
         appPreferences = new AppPreferences(sharedStorage);
+
+
     }
 }

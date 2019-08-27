@@ -12,7 +12,7 @@ public class AppPreferences {
 
     public boolean isFirstLaunch() {
         try {
-            return sharedStorage.getBoolean(PREF_IS_FIRST_LAUNCH, true);
+            return sharedStorage.get(PREF_IS_FIRST_LAUNCH, true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -22,9 +22,10 @@ public class AppPreferences {
 
     public void setLaunched() {
         try {
-            sharedStorage.setBoolean(PREF_IS_FIRST_LAUNCH, false);
+            sharedStorage.set(PREF_IS_FIRST_LAUNCH, false);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

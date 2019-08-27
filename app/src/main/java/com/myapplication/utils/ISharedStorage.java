@@ -2,16 +2,15 @@ package com.myapplication.utils;
 
 public interface ISharedStorage {
 
-    void setBoolean(String key, boolean value);
+    <T> void set(String key, T value) throws Exception;
 
-    boolean getBoolean(String key, boolean defValue);
+    <T> T get(String key, T defValue) throws Exception;
 
     boolean contains(String key);
 
     void remove(String key);
 
     void clear();
-
 }
 
 

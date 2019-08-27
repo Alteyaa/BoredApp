@@ -1,7 +1,6 @@
 package com.myapplication;
-import android.content.Intent;
-
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.myapplication.intro.IntroActivity;
@@ -12,14 +11,17 @@ public class LaunchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
+        redirect();
+    }
 
+    private void redirect() {
         if (App.appPreferences.isFirstLaunch()) {
-            startActivity(new Intent(this, IntroActivity.class));
+            App.appPreferences.setLaunched();
+            IntroActivity.start(this);
         } else {
             MainActivity.start(this);
         }
 
-        App.appPreferences.setLaunched();
         finish();
     }
 
