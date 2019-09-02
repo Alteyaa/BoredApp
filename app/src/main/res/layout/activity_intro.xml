@@ -57,7 +57,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/next_btn"
         app:layout_constraintLeft_toLeftOf="@id/skip_btn"
         app:layout_constraintTop_toTopOf="@+id/next_btn"
-        android:layout_centerInParent="true"
         app:piv_animationType="scale"
         app:piv_dynamicCount="true"
         app:piv_interactiveAnimation="true"

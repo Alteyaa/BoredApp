@@ -121,10 +121,10 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public class IntroPagerAdapter extends FragmentPagerAdapter {
+
         List<IntroPageConfig> pages;
 
-        IntroPagerAdapter(
-                FragmentManager fm,
+        IntroPagerAdapter(FragmentManager fm,
                 List<IntroPageConfig> pages
         ) {
             super(fm);

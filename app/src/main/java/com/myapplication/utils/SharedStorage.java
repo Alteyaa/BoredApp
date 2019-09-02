@@ -13,7 +13,6 @@ public class SharedStorage implements ISharedStorage {
                 (preferenceName,
                         Context.MODE_PRIVATE
                 );
-
     }
 
     @Override
@@ -32,7 +31,6 @@ public class SharedStorage implements ISharedStorage {
         } else {
             throw new Exception("Can't put preferences for" + value.getClass().getSimpleName());
         }
-
     }
 
 
@@ -52,7 +50,6 @@ public class SharedStorage implements ISharedStorage {
             throw new Exception("Can't put preferences for" + defValue.getClass().getSimpleName());
         }
     }
-
 
     @Override
     public boolean contains(String key) {
