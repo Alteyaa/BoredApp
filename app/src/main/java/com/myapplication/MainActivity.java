@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -51,13 +52,25 @@ public class MainActivity extends AppCompatActivity {
         txtParticipants = findViewById(R.id.textParticipants);
         txtPrice = findViewById(R.id.textPrice);
         progressBar = (ProgressBar)findViewById(R.id.loading);
+
     }
 
-    public void onClick(View view) {
 
+    private void showLoading(){
+        progressBar.setVisibility(View.VISIBLE);
+    }
+    private void hideLoading(){
+        progressBar.setVisibility(View.GONE);
+    }
+
+
+
+    public void refreshAction() {
+        showLoading();
         new BoredApiClient().getBoredAction(new IBoredApiClient.BoredActionCallBack() {
             @Override
             public void onSuccess(BoredAction action) {
+                hideLoading();
                 txtActivity.setText(action.getActivity());
                 txtType.setText(action.getType());
                 txtAccessibility.setText((action.getAccessibility()).toString());
@@ -69,11 +82,15 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Exception e) {
+
                 Log.d("ololo","Failure" + e.getMessage());
             }
 
-
         });
+
     }
 
+    public void onClick(View view) {
+        refreshAction();
+    }
 }
