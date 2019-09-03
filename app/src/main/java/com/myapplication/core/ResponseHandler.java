@@ -1,15 +1,15 @@
-package com.myapplication.data;
+package com.myapplication.core;
 
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public abstract class CoreCallBack<T> implements Callback<T> {
+public abstract class ResponseHandler<T> implements Callback<T> {
 
-    abstract void onSuccess(T result);
+    public abstract void onSuccess(T result);
 
-    abstract void onFailure(Exception e);
+    public abstract void onFailure(Exception e);
 
 
     @Override
