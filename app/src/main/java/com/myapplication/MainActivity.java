@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,16 +16,30 @@ import com.myapplication.data.BoredApiClient;
 import com.myapplication.data.IBoredApiClient;
 import com.myapplication.model.BoredAction;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnRefresh;
+    @BindView(R.id.accessibility_progress)
+    ProgressBar accessibilityProgress;
+    @BindView(R.id.loading)
+    ProgressBar progressBar_loading;
+    @BindView(R.id.refresh)
+    Button btnRefresh;
+    @BindView(R.id.textAction)
     TextView txtActivity;
-    TextView txtAccessibility;
+    @BindView(R.id.textType)
     TextView txtType;
+    @BindView(R.id.textParticipants)
     TextView txtParticipants;
+    @BindView(R.id.textPrice)
     TextView txtPrice;
-    private ProgressBar progressBar;
-
+    @OnClick(R.id.refresh)
+    public void onClick(View view) {
+        refreshAction();
+    }
 
 
     public static void start(Context context) {
@@ -38,31 +52,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
-
-
+        ButterKnife.bind(this);
     }
 
-
-    private void init() {
-        btnRefresh = findViewById(R.id.refresh);
-        txtActivity = findViewById(R.id.textAction);
-        txtAccessibility = findViewById(R.id.textAccessibility);
-        txtType = findViewById(R.id.textType);
-        txtParticipants = findViewById(R.id.textParticipants);
-        txtPrice = findViewById(R.id.textPrice);
-        progressBar = (ProgressBar)findViewById(R.id.loading);
-
+    private void showLoading() {
+        progressBar_loading.setVisibility(View.VISIBLE);
     }
 
-
-    private void showLoading(){
-        progressBar.setVisibility(View.VISIBLE);
+    private void hideLoading() {
+        progressBar_loading.setVisibility(View.GONE);
     }
-    private void hideLoading(){
-        progressBar.setVisibility(View.GONE);
-    }
-
 
 
     public void refreshAction() {
@@ -71,11 +70,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(BoredAction action) {
                 hideLoading();
+
+                int accessibility = (int) (action.getAccessibility() * 100);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    accessibilityProgress.setProgress(accessibility, true);
+                } else {
+                    accessibilityProgress.setProgress(accessibility);
+                }
                 txtActivity.setText(action.getActivity());
                 txtType.setText(action.getType());
-                txtAccessibility.setText((action.getAccessibility()).toString());
                 txtPrice.setText((action.getPrice()).toString());
                 txtParticipants.setText((action.getParticipants()).toString());
+
                 Log.d("ololo", "Receive action - " + action.getTitle() + " " + action.getActivity());
 
             }
@@ -83,14 +89,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Exception e) {
 
-                Log.d("ololo","Failure" + e.getMessage());
+                Log.d("ololo", "Failure" + e.getMessage());
             }
 
         });
 
     }
 
-    public void onClick(View view) {
-        refreshAction();
-    }
+
 }
