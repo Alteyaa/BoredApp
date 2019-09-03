@@ -41,7 +41,7 @@ public class SharedStorage implements ISharedStorage {
         } else if (defValue instanceof Long) {
             return (T) Long.valueOf(preferences.getLong(key, (Long) defValue));
         } else if (defValue instanceof String) {
-            return (T) String.valueOf(preferences.getString(key, (String) defValue));
+            return (T) (preferences.getString(key, (String) defValue));
         } else if (defValue instanceof Boolean) {
             return (T) Boolean.valueOf(preferences.getBoolean(key, (Boolean) defValue));
         } else if (defValue instanceof Float) {
