@@ -15,5 +15,10 @@
         <item>Education</item>
         <item>Recreational</item>
         <item>Social</item>
+        <item>Diy</item>
+        <item>Charity</item>
+        <item>Cooking</item>
+        <item>Music</item>
+        <item>Busywork</item>
     </string-array>
 </resources>

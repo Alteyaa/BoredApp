@@ -15,9 +15,14 @@ import android.widget.TextView;
 import com.myapplication.data.BoredApiClient;
 import com.myapplication.data.IBoredApiClient;
 import com.myapplication.model.BoredAction;
+import com.myapplication.model.EActionType;
 
 import org.angmarch.views.NiceSpinner;
 
+
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtParticipants;
     @BindView(R.id.action_price)
     TextView txtPrice;
-
+    private BoredApiClient client;
     @OnClick(R.id.refresh)
     public void onClick(View view) {
         refreshAction();
@@ -59,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        List<String> dataset = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.categories)));
+        niceSpinner.attachDataSource(dataset);
+        client = new BoredApiClient();
 
     }
 
@@ -75,8 +83,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void refreshAction() {
+
+        int selected = niceSpinner.getSelectedIndex();
+        String type = null;
+        if (selected != 0) {
+            type = EActionType.values()[selected - 1]
+                    .toString()
+                    .toLowerCase();
+        }
+
         showLoading();
-        new BoredApiClient().getBoredAction(new IBoredApiClient.BoredActionCallBack() {
+        client.getBoredAction("activity",type,
+                new IBoredApiClient.BoredActionCallBack() {
             @Override
             public void onSuccess(BoredAction action) {
                 hideLoading();
@@ -87,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     accessibilityProgress.setProgress(accessibility);
                 }
+                txtType.setText(action.getType().toString());
                 txtActivity.setText(action.getActivity());
                 txtPrice.setText((action.getPrice()).toString());
                 txtParticipants.setText((action.getParticipants()).toString());
