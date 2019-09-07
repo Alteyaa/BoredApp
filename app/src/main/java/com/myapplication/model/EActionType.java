@@ -12,4 +12,5 @@ public enum EActionType {
     @SerializedName("relaxation") RELAXATION,
     @SerializedName("music") MUSIC,
     @SerializedName("busywork") BUSYWORK
+
 }

@@ -16,31 +16,37 @@ import com.myapplication.data.BoredApiClient;
 import com.myapplication.data.IBoredApiClient;
 import com.myapplication.model.BoredAction;
 
+import org.angmarch.views.NiceSpinner;
+
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.accessibility_progress)
+    @BindView(R.id.action_accessibility_value)
     ProgressBar accessibilityProgress;
     @BindView(R.id.loading)
     ProgressBar progressBar_loading;
     @BindView(R.id.refresh)
     Button btnRefresh;
-    @BindView(R.id.textAction)
+    @BindView(R.id.action_activity)
     TextView txtActivity;
-    @BindView(R.id.textType)
+    @BindView(R.id.action_type)
     TextView txtType;
-    @BindView(R.id.textParticipants)
+    @BindView(R.id.action_participants)
     TextView txtParticipants;
-    @BindView(R.id.textPrice)
+    @BindView(R.id.action_price)
     TextView txtPrice;
+
     @OnClick(R.id.refresh)
     public void onClick(View view) {
         refreshAction();
     }
 
+    @BindView(R.id.nice_spinner)
+    NiceSpinner niceSpinner;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -53,7 +59,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
     }
+
+
 
     private void showLoading() {
         progressBar_loading.setVisibility(View.VISIBLE);
@@ -62,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private void hideLoading() {
         progressBar_loading.setVisibility(View.GONE);
     }
+
 
 
     public void refreshAction() {
@@ -78,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     accessibilityProgress.setProgress(accessibility);
                 }
                 txtActivity.setText(action.getActivity());
-                txtType.setText(action.getType());
                 txtPrice.setText((action.getPrice()).toString());
                 txtParticipants.setText((action.getParticipants()).toString());
 
