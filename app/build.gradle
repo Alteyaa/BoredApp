@@ -37,5 +37,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.jakewharton:butterknife:10.1.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
+    implementation 'com.github.arcadefire:nice-spinner:1.4.3'
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
+
 
 }
