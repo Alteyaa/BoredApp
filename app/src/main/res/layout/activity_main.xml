@@ -5,138 +5,278 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <TableLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_action_container"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border"
-        android:padding="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:stretchColumns="*">
+        app:cardCornerRadius="@dimen/corner_radius"
+        app:cardElevation="12dp">
 
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_marginBottom="10dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                 android:drawableLeft="@drawable/ic_activity"/>
-
-            <TextView
-                android:id="@+id/textAction"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="activity"
-                android:textColor="@color/colorAccent" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-               android:drawableLeft="@drawable/ic_adb24dp" />
-
-
             <ProgressBar
-                android:id="@+id/accessibility_progress"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="40dp"
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/action_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:background="@drawable/bg_text"
+                android:paddingLeft="24dp"
+                android:paddingTop="4dp"
+                android:paddingRight="24dp"
+                android:paddingBottom="4dp"
+                android:text="type"
+                android:textColor="@color/colorWhite"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/action_like_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_favorite"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/action_activity"
+                style="@style/BoldText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginRight="32dp"
+                android:gravity="center"
+                android:text="Activity"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/action_type" />
+
+            <!-- Price -->
+            <TextView
+                android:id="@+id/action_price_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:text="$"
+                app:layout_constraintBottom_toTopOf="@+id/action_price"
+                app:layout_constraintLeft_toLeftOf="@+id/action_price"
+                app:layout_constraintRight_toRightOf="@+id/action_price" />
+
+            <TextView
+                android:id="@+id/action_price"
+                style="@style/AppTheme.HintText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/default_margin"
+                android:text="Price💰"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/action_participants" />
+
+            <!-- Participants -->
+
+            <ImageView
+                android:id="@+id/action_participants_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_part"
+                app:layout_constraintHorizontal_bias="0.609"
+                app:layout_constraintLeft_toLeftOf="@+id/action_price_amount"
+                app:layout_constraintRight_toRightOf="@+id/action_participants"
+                app:layout_constraintTop_toBottomOf="@+id/action_activity" />
+
+            <ImageView
+                android:id="@+id/action_participants_icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_part_2"
+                android:layout_marginBottom="@dimen/small_margin"
+                app:layout_constraintLeft_toRightOf="@+id/action_participants_icon"
+                app:layout_constraintTop_toBottomOf="@+id/action_activity" />
+            <ImageView
+                android:id="@+id/action_participants_icon3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:src="@drawable/ic_part_3"
+                android:layout_marginBottom="@dimen/small_margin"
+                app:layout_constraintLeft_toRightOf="@+id/action_participants_icon2"
+                app:layout_constraintTop_toBottomOf="@+id/action_activity" />
+            <ImageView
+                android:id="@+id/action_participants_icon4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:src="@drawable/ic_part_3"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@+id/action_participants_icon3"
+                app:layout_constraintTop_toBottomOf="@+id/action_activity" />
+
+            <TextView
+                android:id="@+id/action_participants"
+                style="@style/AppTheme.HintText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Participants"
+                app:layout_constraintLeft_toRightOf="@+id/action_price"
+                app:layout_constraintRight_toLeftOf="@+id/action_accessibility"
+                app:layout_constraintTop_toBottomOf="@+id/action_participants_icon" />
+
+            <!-- Accessibility -->
+            <ProgressBar
+                android:id="@+id/action_accessibility_value"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="90dp"
                 android:layout_height="10dp"
-                android:layout_marginEnd="4dp"
-                android:progress="190"
+                android:layout_marginBottom="8dp"
+                android:max="100"
+                android:progress="100"
                 android:progressDrawable="@drawable/bg_progress_accessibility"
-                />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+                app:layout_constraintBottom_toTopOf="@+id/action_accessibility"
+                app:layout_constraintHorizontal_bias="0.282"
+                app:layout_constraintLeft_toLeftOf="@+id/action_accessibility"
+                app:layout_constraintRight_toRightOf="@+id/action_accessibility" />
 
             <TextView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_type"/>
-
-            <TextView
-                android:id="@+id/textType"
+                android:id="@+id/action_accessibility"
+                style="@style/AppTheme.HintText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="education"
-                android:textColor="@color/colorAccent" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_acccess" />
-
-            <TextView
-                android:id="@+id/textParticipants"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/colorAccent" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_attach_money_black_24dp" />
-
-            <TextView
-                android:id="@+id/textPrice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@color/colorAccent" />
-        </TableRow>
-    </TableLayout>
-
+                android:layout_marginBottom="@dimen/default_margin"
+                android:text="Accessibility"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/action_participants"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/action_participants"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/refresh"
-        style="@style/PrimaryButton"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:layout_marginBottom="248dp"
-        android:text="Refresh"
-        android:onClick="onClick"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.382"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_margin="@dimen/default_margin"
+        app:layout_constraintTop_toBottomOf="@+id/main_action_container"
+        android:background="@drawable/bg_primary_btn"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="sans-serif-black"
+        android:text="Next"/>
 
-    <ProgressBar
-        android:id="@+id/loading"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="8dp"
+        android:layout_margin="4dp"
+        android:text="Category"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/nice_spinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/nice_spinner"
+        app:layout_constraintRight_toRightOf="@+id/nice_spinner" />
+
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/nice_spinner"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_margin="40dp"
+        android:layout_marginTop="64dp"
+        android:background="@color/colorWhite"
+        android:entries="@array/categories"
+        app:layout_constraintHorizontal_bias="0.134"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@+id/refresh"
+        app:layout_constraintTop_toBottomOf="@+id/refresh" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_margin="4dp"
+        android:text="Price"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/rangeSeekbar3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/rangeSeekbar3"
+        app:layout_constraintRight_toRightOf="@+id/rangeSeekbar3" />
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/rangeSeekbar3"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:scrollbarSize="@dimen/small_margin"
+        app:bar_color="#fff"
+        app:bar_highlight_color="#2434AD"
+        app:corner_radius="10"
+        app:data_type="_integer"
+        app:gap="10"
+        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintLeft_toRightOf="@+id/nice_spinner"
+        app:layout_constraintRight_toRightOf="@+id/refresh"
+        app:layout_constraintTop_toBottomOf="@+id/refresh"
+        app:left_thumb_color="#693BFD"
+        app:left_thumb_color_pressed="#693BFD"
+        app:max_value="100"
+        app:min_value="50"
+        app:right_thumb_color="#693BFD"
+        app:right_thumb_color_pressed="#693BFD" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_margin="4dp"
+        android:text="Accessibility"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/rangeSeekbar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/rangeSeekbar"
+        app:layout_constraintRight_toRightOf="@+id/rangeSeekbar" />
+
+    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+        android:id="@+id/rangeSeekbar"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="100dp"
+        android:layout_marginTop="104dp"
+        android:scrollbarSize="@dimen/small_margin"
+        app:bar_color="#fff"
+        app:bar_highlight_color="#2434AD"
+        app:corner_radius="10"
+        app:data_type="_integer"
+        app:gap="10"
+        app:layout_constraintHorizontal_bias="0.388"
+        app:layout_constraintLeft_toRightOf="@+id/nice_spinner"
+        app:layout_constraintRight_toRightOf="@+id/refresh"
+        app:layout_constraintTop_toBottomOf="@+id/rangeSeekbar3"
+        app:left_thumb_color="#693BFD"
+        app:left_thumb_color_pressed="#693BFD"
+        app:max_value="100"
+        app:min_value="50"
+        app:right_thumb_color="#693BFD"
+        app:right_thumb_color_pressed="#693BFD" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

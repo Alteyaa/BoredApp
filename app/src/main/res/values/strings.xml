@@ -8,4 +8,12 @@
     <string name="title_activity_intro_page_1">Here you can find everything</string>
     <string name="title_activity_intro_page_2">Your life consists of adventure</string>
     <string name="title_activity_intro_page_3">How you love yourself</string>
+
+
+    <string-array name="categories">
+        <item>Type</item>
+        <item>Education</item>
+        <item>Recreational</item>
+        <item>Social</item>
+    </string-array>
 </resources>
