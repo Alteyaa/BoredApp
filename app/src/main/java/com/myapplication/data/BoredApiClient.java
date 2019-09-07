@@ -6,6 +6,7 @@ import com.myapplication.model.BoredAction;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 
 public class BoredApiClient extends CoreApiClient implements IBoredApiClient {
@@ -13,11 +14,10 @@ public class BoredApiClient extends CoreApiClient implements IBoredApiClient {
 
     BoredNetworkClient client = getRetrofit("http://www.boredapi.com/")
             .create(BoredNetworkClient.class);
-
     @Override
-    public void getBoredAction(BoredActionCallBack callBack) {
+    public void getBoredAction(String activity, String type, BoredActionCallBack callBack) {
 
-        Call<BoredAction> call = client.getBoredAction();
+        Call<BoredAction> call = client.getBoredAction(type,activity);
 
         call.enqueue(new ResponseHandler<BoredAction>() {
             @Override
@@ -33,14 +33,14 @@ public class BoredApiClient extends CoreApiClient implements IBoredApiClient {
 
         });
 
-
     }
 
     interface BoredNetworkClient {
 
         @GET("api/activity/")
         Call<BoredAction> getBoredAction(
-
+                @Query("type") String type,
+                @Query("activity") String activity
 
         ); //TODO: Add query parameters
 
