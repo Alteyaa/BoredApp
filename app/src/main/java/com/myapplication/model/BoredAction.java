@@ -28,7 +28,7 @@ public class BoredAction {
     @SerializedName("link")
     private String link;
 
-    public BoredAction(String title, String key, String activity, Float accessibility, EActionType  type, Float participants, Float price, String link) {
+    public BoredAction(String title, String key, String activity, Float accessibility, EActionType type, Float participants, Float price, String link) {
         this.activity = activity;
         this.accessibility = accessibility;
         this.type = type;
