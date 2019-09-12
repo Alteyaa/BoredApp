@@ -2,7 +2,9 @@ package com.myapplication.utils;
 
 public class AppPreferences {
 
-    private static final String PREF_IS_FIRST_LAUNCH = "is_first_launch";
+    public static final String PREF_IS_FIRST_LAUNCH = "is_first_launch";
+    public static final String PREF_IS_LIGHT_MODE = "is_light_mode";
+
 
     private ISharedStorage sharedStorage;
 
