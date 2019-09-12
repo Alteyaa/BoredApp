@@ -8,10 +8,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.myapplication.data.ActionRequestOptions;
 import com.myapplication.data.BoredApiClient;
 import com.myapplication.data.IBoredApiClient;
 import com.myapplication.model.BoredAction;
@@ -44,7 +50,14 @@ public class MainActivity extends AppCompatActivity {
     TextView txtParticipants;
     @BindView(R.id.action_price)
     TextView txtPrice;
+    @BindView(R.id.action_like_img)
+    ImageView likeImg;
+    @BindView(R.id.action_like_container)
+    View likeImgContainer;
+
+    private boolean isLiked = false;
     private BoredApiClient client;
+
     @OnClick(R.id.refresh)
     public void onClick(View view) {
         refreshAction();
@@ -52,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.nice_spinner)
     NiceSpinner niceSpinner;
+    @BindView(R.id.rangeSeekbar3)
+    CrystalRangeSeekbar rangeSeekbar;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
@@ -67,19 +82,40 @@ public class MainActivity extends AppCompatActivity {
         List<String> dataset = new LinkedList<>(Arrays.asList(getResources().getStringArray(R.array.categories)));
         niceSpinner.attachDataSource(dataset);
         client = new BoredApiClient();
+        likeImgContainer.setOnClickListener(view -> {
+            Animation anim = AnimationUtils.loadAnimation(this, R.anim.scale_anim);
+            likeImg.startAnimation(anim);
 
+            isLiked = !isLiked;
+            if (isLiked) {
+                likeImg.setImageResource(R.drawable.ic_heart_filed);
+            } else {
+                likeImg.setImageResource(R.drawable.ic_favorite);
+            }
+        });
     }
-
 
 
     private void showLoading() {
-        progressBar_loading.setVisibility(View.VISIBLE);
+        progressBar_loading.setVisibility(View.INVISIBLE);
+        accessibilityProgress.setVisibility(View.VISIBLE);
+        txtActivity.setVisibility(View.VISIBLE);
+        txtType.setVisibility(View.VISIBLE);
+        txtPrice.setVisibility(View.VISIBLE);
+        txtParticipants.setVisibility(View.VISIBLE);
+
+
     }
 
     private void hideLoading() {
-        progressBar_loading.setVisibility(View.GONE);
-    }
 
+        progressBar_loading.setVisibility(View.VISIBLE);
+        accessibilityProgress.setVisibility(View.INVISIBLE);
+        txtActivity.setVisibility(View.INVISIBLE);
+        txtType.setVisibility(View.INVISIBLE);
+        txtPrice.setVisibility(View.INVISIBLE);
+        txtParticipants.setVisibility(View.INVISIBLE);
+    }
 
 
     public void refreshAction() {
@@ -92,37 +128,54 @@ public class MainActivity extends AppCompatActivity {
                     .toLowerCase();
         }
 
-        showLoading();
-        client.getBoredAction("activity",type,
-                new IBoredApiClient.BoredActionCallBack() {
+        ActionRequestOptions requestOptions = new ActionRequestOptions(
+                type,
+                0.0f,
+                1.0f,
+                0f,
+                1f,
+                null
+        );
+        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
             @Override
-            public void onSuccess(BoredAction action) {
-                hideLoading();
-
-                int accessibility = (int) (action.getAccessibility() * 100);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    accessibilityProgress.setProgress(accessibility, true);
+            public void valueChanged(Number minValue, Number maxValue) {
+                if (minValue == null) {
+                    rangeSeekbar.getSelectedMinValue();
                 } else {
-                    accessibilityProgress.setProgress(accessibility);
+                    rangeSeekbar.getSelectedMaxValue();
                 }
-                txtType.setText(action.getType().toString());
-                txtActivity.setText(action.getActivity());
-                txtPrice.setText((action.getPrice()).toString());
-                txtParticipants.setText((action.getParticipants()).toString());
 
-                Log.d("ololo", "Receive action - " + action.getTitle() + " " + action.getActivity());
+                hideLoading();
+                client.getBoredAction(requestOptions,
+                        new IBoredApiClient.BoredActionCallBack() {
+                            @Override
+                            public void onSuccess(BoredAction action) {
 
+                                int accessibility = (int) (action.getAccessibility() * 100);
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    accessibilityProgress.setProgress(accessibility, true);
+                                } else {
+                                    accessibilityProgress.setProgress(accessibility);
+                                }
+
+                                txtType.setText(action.getType().toString());
+                                txtActivity.setText(action.getActivity());
+                                txtPrice.setText((action.getPrice()).toString());
+                                txtParticipants.setText((action.getParticipants()).toString());
+                                showLoading();
+                                Log.d("ololo", "Receive action - " + action.getTitle() + " " + action.getActivity());
+
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+
+                                Log.d("ololo", "Failure" + e.getMessage());
+                            }
+
+                        });
             }
-
-            @Override
-            public void onFailure(Exception e) {
-
-                Log.d("ololo", "Failure" + e.getMessage());
-            }
-
         });
-
     }
-
 
 }
