@@ -6,10 +6,8 @@ public interface IBoredApiClient {
 
     void getBoredAction(
 
-            String activity,
-            String type,
-            final BoredActionCallBack callBack
-
+           ActionRequestOptions eActionRequest,
+           BoredActionCallBack callBack
     );
 
     interface BoredActionCallBack extends ICoreCallback<BoredAction> {
