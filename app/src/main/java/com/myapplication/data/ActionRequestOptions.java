@@ -4,18 +4,18 @@ public class ActionRequestOptions {
 
     private String key;
     private String type;
-    private Float minPrice;
-    private Float maxPrice;
-    private Float minAccessibility;
-    private Float maxAccessibility;
+    private double minPrice;
+    private double maxPrice;
+    private double minAccessibility;
+    private double maxAccessibility;
     private Integer participants;
 
     public ActionRequestOptions(
             String type,
-            Float minPrice,
-            Float maxPrice,
-            Float minAccessibility,
-            Float maxAccessibility,
+            double minPrice,
+            double maxPrice,
+            double minAccessibility,
+            double maxAccessibility,
             Integer participants
     ) {
         this.type = type;
@@ -54,7 +54,7 @@ public class ActionRequestOptions {
         this.type = type;
     }
 
-    public Float getMinPrice() {
+    public double getMinPrice() {
         return minPrice;
     }
 
@@ -62,7 +62,7 @@ public class ActionRequestOptions {
         this.minPrice = minPrice;
     }
 
-    public Float getMaxPrice() {
+    public double getMaxPrice() {
         return maxPrice;
     }
 
@@ -70,7 +70,7 @@ public class ActionRequestOptions {
         this.maxPrice = maxPrice;
     }
 
-    public Float getMinAccessibility() {
+    public double getMinAccessibility() {
         return minAccessibility;
     }
 
@@ -78,7 +78,7 @@ public class ActionRequestOptions {
         this.minAccessibility = minAccessibility;
     }
 
-    public Float getMaxAccessibility() {
+    public double getMaxAccessibility() {
         return maxAccessibility;
     }
 
