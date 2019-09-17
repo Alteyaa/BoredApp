@@ -55,10 +55,10 @@ public class BoredApiClient extends CoreApiClient implements IBoredApiClient {
         Call<BoredAction> getBoredAction(
                 @Query("key") String key,
                 @Query("type") String type,
-                @Query("minprice") Float minPrice,
-                @Query("maxprice") Float maxPrice,
-                @Query("minaccessibility") Float minAccessibility,
-                @Query("maxaccessibility") Float maxAccessibility,
+                @Query("minprice") Object minPrice,
+                @Query("maxprice") Object maxPrice,
+                @Query("minaccessibility") Object minAccessibility,
+                @Query("maxaccessibility") Object maxAccessibility,
                 @Query("participants") Integer participants
 
         ); //TODO: Add query parameters

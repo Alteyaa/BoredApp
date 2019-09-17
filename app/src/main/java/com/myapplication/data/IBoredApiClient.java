@@ -6,7 +6,7 @@ public interface IBoredApiClient {
 
     void getBoredAction(
 
-           ActionRequestOptions eActionRequest,
+           ActionRequestOptions requestOptions,
            BoredActionCallBack callBack
     );
 
