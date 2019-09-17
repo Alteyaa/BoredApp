@@ -25,5 +25,4 @@ public class LaunchActivity extends AppCompatActivity {
 
         finish();
     }
-
 }

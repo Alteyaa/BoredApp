@@ -10,6 +10,7 @@
     <string name="title_activity_intro_page_3">How you love yourself</string>
 
 <string name="next">next</string>
+
     <string-array name="categories">
         <item>Type</item>
         <item>Education</item>
