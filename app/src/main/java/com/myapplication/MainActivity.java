@@ -185,7 +185,6 @@ public class MainActivity extends AppCompatActivity {
 
                         txtType.setText(action.getType().toString());
                         txtActivity.setText(action.getActivity());
-                        txtPrice.setText((action.getPrice()).toString());
                         txtParticipants.setText((action.getParticipants()).toString());
                         actionAccessibility.setText(action.getAccessibility().toString());
 
@@ -199,7 +198,17 @@ public class MainActivity extends AppCompatActivity {
                             participantsIcon.setImageResource(R.drawable.ic_part_4);
                         } else participantsIcon.setImageResource(R.drawable.ic_part_4);
 
+                        if (action.getPrice() == 0) {
+                            actionAmount.setText("Free");
+                        } else if (0.1>=action.getPrice()&&action.getPrice() <= 0.3) {
+                            actionAmount.setText("💰");
+                        } else if (0.3>action.getPrice()&&action.getPrice() <= 0.6) {
+                            actionAmount.setText("💰💰");
+                        } else if (0.6>action.getPrice()&&action.getPrice() <= 1) {
+                            actionAmount.setText("💰💰💰");
 
+
+                        }
                         Log.d("ololo", "Receive action - " + action.getTitle() + " " + action.getActivity());
 
                     }
